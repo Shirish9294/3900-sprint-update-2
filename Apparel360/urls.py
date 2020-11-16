@@ -34,10 +34,10 @@ urlpatterns = [
     path('signup/', UserViews.signup_form, name='signup_form'),
     path('p_list/', ProductViews.product_list, name='product_list'),
     path('p_detail/', ProductViews.product_detail, name='product_detail'),
+    path('orders/', include('orders.urls', namespace='orders')),
     path('cart/', include('cart.urls', namespace='cart')),
     path('password_change/', auth_views.PasswordChangeView.as_view(), name='password_change'),
     path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),
-    path('orders/', include('orders.urls', namespace='orders')),
     path('user_profile/', UserViews.user_update, name = 'user_profile'),
     path('update_user_information', UserViews.user_update, name = 'update_user_information'),
 

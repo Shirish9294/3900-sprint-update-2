@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import OrderItem
 from .forms import OrderCreateForm
 from cart.cart import Cart
-
+from .tasks import order_created
 
 def order_create(request):
     cart = Cart(request)
@@ -15,14 +15,15 @@ def order_create(request):
                                         product=item['product'],
                                         price=item['price'],
                                         quantity=item['quantity'])
-
             # clear the cart
             cart.clear()
+            # launch asynchronous task
+
             return render(request,
-                            'orders/order/created.html',
-                            {'order': order})
+                        'orders/order/created.html',
+                        {'order': order})
     else:
         form = OrderCreateForm()
     return render(request,
-                'orders/order/create.html',
-                {'cart': cart, 'form': form})
+'orders/order/create.html',
+{'cart': cart, 'form': form})
