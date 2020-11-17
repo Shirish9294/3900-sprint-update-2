@@ -82,7 +82,7 @@ def logout_func(request):
 
 @login_required
 def dashboard(request):
-    return render(request, 'account/dashboard.html', {'section': 'dashboard'})
+    return render(request, 'dashboard.html', {'section': 'dashboard'})
 
 @login_required(login_url='/login') # Check login
 def user_update(request):
